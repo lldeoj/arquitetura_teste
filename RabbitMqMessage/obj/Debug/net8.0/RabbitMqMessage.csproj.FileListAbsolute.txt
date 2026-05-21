@@ -1,0 +1,12 @@
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\bin\Debug\net8.0\RabbitMqMessage.deps.json
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\bin\Debug\net8.0\RabbitMqMessage.dll
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\bin\Debug\net8.0\RabbitMqMessage.pdb
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.csproj.AssemblyReference.cache
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.AssemblyInfoInputs.cache
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.AssemblyInfo.cs
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.csproj.CoreCompileInputs.cache
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.dll
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\refint\RabbitMqMessage.dll
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.pdb
+C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\ref\RabbitMqMessage.dll

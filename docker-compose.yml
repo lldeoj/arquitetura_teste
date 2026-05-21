@@ -1,0 +1,68 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: lancamentos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lancamentos"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq-user
+      RABBITMQ_DEFAULT_PASS: rabbitmq-user
+    ports:
+      - "15672:15672" # management UI
+      - "5672:5672"   # amqp
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  service:
+    build:
+      context: .
+      dockerfile: ServiceLancamentos/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Database=lancamentos;Username=postgres;Password=postgres
+    ports:
+      - "5000:80"
+
+  service-consolidado:
+    build:
+      context: .
+      dockerfile: ServiceConsolidado/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Database=lancamentos;Username=postgres;Password=postgres
+      - ConsolidadoSettings__OutputPath=/app/relatorios
+    ports:
+      - "5001:80"
+    volumes:
+      - relatorios-data:/app/relatorios
+
+volumes:
+  db-data:
+  relatorios-data:

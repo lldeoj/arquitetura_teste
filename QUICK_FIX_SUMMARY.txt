@@ -1,0 +1,151 @@
+🔧 CORREÇÃO APLICADA - Erro de Desserialização JSON
+
+═══════════════════════════════════════════════════════════════════════════════
+
+❌ PROBLEMA:
+─────────────────────────────────────────────────────────────────────────────
+
+Ao enviar mensagem JSON para fila RabbitMQ:
+
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "valor": 1000.00,
+  "isCredito": true,
+  "agenciaOrigem": "0001",
+  "contaOrigem": "123456",
+  "descricao": "Depósito inicial",
+  "usuario": "vendedor-01",
+  "dataHora": "2024-01-15T10:30:45Z"
+}
+
+Você recebia:
+  ArgumentNullException: Value cannot be null. (Parameter 'request')
+
+  Processando mensagem com ID: 00000000-0000-0000-0000-000000000000, 
+  Usuário: , Valor: 0  ← TODOS OS VALORES VAZIOS!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔍 CAUSA RAIZ:
+─────────────────────────────────────────────────────────────────────────────
+
+Incompatibilidade entre JSON e Modelo:
+
+  JSON (camelCase):     Model (PascalCase):
+  "id"              →   Id ✗ (não encontra)
+  "valor"           →   Valor ✗ (não encontra)
+  "isCredito"       →   IsCredito ✗ (não encontra)
+
+System.Text.Json é CASE-SENSITIVE por padrão!
+Resultado: Todas as propriedades ficam com valores default (Guid.Empty, 0, "")
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ SOLUÇÃO APLICADA:
+─────────────────────────────────────────────────────────────────────────────
+
+Arquivo modificado:
+  📄 ServiceLancamentos/Interface/RabbitMqRequest.cs
+
+Adicionado atributo [JsonPropertyName] em cada propriedade:
+
+  ANTES:
+  ──────
+  public class RabbitMQRequest
+  {
+      public Guid Id { get; set; }
+      public decimal Valor { get; set; }
+      public bool IsCredito { get; set; }
+      // ...
+  }
+
+  DEPOIS:
+  ──────
+  public class RabbitMQRequest
+  {
+      [JsonPropertyName("id")]
+      public Guid Id { get; set; }
+
+      [JsonPropertyName("valor")]
+      public decimal Valor { get; set; }
+
+      [JsonPropertyName("isCredito")]
+      public bool IsCredito { get; set; }
+
+      [JsonPropertyName("agenciaOrigem")]
+      public string AgenciaOrigem { get; set; }
+
+      [JsonPropertyName("contaOrigem")]
+      public string ContaOrigem { get; set; }
+
+      [JsonPropertyName("descricao")]
+      public string Descricao { get; set; }
+
+      [JsonPropertyName("usuario")]
+      public string Usuario { get; set; }
+
+      [JsonPropertyName("dataHora")]
+      public DateTime DataHora { get; set; }
+  }
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 COMO TESTAR A CORREÇÃO:
+─────────────────────────────────────────────────────────────────────────────
+
+1. Rebuild dos containers:
+   docker-compose down
+   docker-compose up --build
+
+2. Envie a MESMA mensagem que estava falhando:
+   URL: http://localhost:15672
+   Fila: lancamentos.queue
+
+   {
+     "id": "550e8400-e29b-41d4-a716-446655440000",
+     "valor": 1000.00,
+     "isCredito": true,
+     "agenciaOrigem": "0001",
+     "contaOrigem": "123456",
+     "descricao": "Depósito inicial",
+     "usuario": "vendedor-01",
+     "dataHora": "2024-01-15T10:30:45Z"
+   }
+
+3. Verifique logs:
+   docker-compose logs -f service
+
+4. Resultado esperado (SUCESSO):
+   ✅ Processando mensagem com ID: 550e8400-e29b-41d4-a716-446655440000, 
+      Usuário: vendedor-01, Valor: 1000
+   ✅ Lançamento criado com sucesso
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 STATUS:
+─────────────────────────────────────────────────────────────────────────────
+
+✅ Compilação: SEM ERROS
+✅ Correção: APLICADA
+✅ Testes: RECOMENDADO
+
+═══════════════════════════════════════════════════════════════════════════════
+
+💡 DICA IMPORTANTE:
+─────────────────────────────────────────────────────────────────────────────
+
+Sempre use [JsonPropertyName("minúsculo")] quando:
+  • JSON usa camelCase ("id", "valor", "isCredito")
+  • C# usa PascalCase (Id, Valor, IsCredito)
+
+Isso garante desserialização correta em ambas as direções!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTAÇÃO:
+─────────────────────────────────────────────────────────────────────────────
+
+Leia: JSON_DESERIALIZATION_FIX.md
+(contém explicação técnica detalhada)
+
+═══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Infra/">
+    <Project Path="Lancamentos.Library/Lancamentos.Library.csproj" />
+    <Project Path="RabbitMqMessage/RabbitMqMessage.csproj" />
+  </Folder>
+  <Project Path="ServiceConsolidado/ServiceConsolidado.csproj" />
+  <Project Path="ServiceLancamentos.Tests/ServiceLancamentos.Tests.csproj" />
+  <Project Path="ServiceLancamentos/ServiceLancamentos.csproj" />
+</Solution>

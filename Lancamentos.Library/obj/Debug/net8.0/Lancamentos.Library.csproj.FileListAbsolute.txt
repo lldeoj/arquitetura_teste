@@ -1,0 +1,15 @@
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.csproj.AssemblyReference.cache
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.AssemblyInfoInputs.cache
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.AssemblyInfo.cs
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.csproj.CoreCompileInputs.cache
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\bin\Debug\net8.0\Lancamentos.Library.deps.json
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\bin\Debug\net8.0\Lancamentos.Library.dll
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\bin\Debug\net8.0\Lancamentos.Library.pdb
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\bin\Debug\net8.0\RabbitMqMessage.dll
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\bin\Debug\net8.0\RabbitMqMessage.pdb
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamen.5285AABC.Up2Date
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.dll
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\refint\Lancamentos.Library.dll
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\Lancamentos.Library.pdb
+C:\code\teste\ServiceLancamentos\Lancamentos.Library\obj\Debug\net8.0\ref\Lancamentos.Library.dll
