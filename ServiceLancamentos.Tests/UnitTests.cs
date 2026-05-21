@@ -9,6 +9,7 @@ using Lancamentos.Library.Mappers;
 using Microsoft.EntityFrameworkCore;
 using ServiceLancamentos.Data;
 using Xunit;
+using Lancamentos.Domain.Dto;
 
 namespace ServiceLancamentos.Tests
 {

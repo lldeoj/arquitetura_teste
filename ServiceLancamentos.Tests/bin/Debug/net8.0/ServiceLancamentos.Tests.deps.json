@@ -848,8 +848,17 @@
           }
         }
       },
+      "Lancamentos.Domain/1.0.0": {
+        "runtime": {
+          "Lancamentos.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Lancamentos.Library/1.0.0": {
         "dependencies": {
+          "Lancamentos.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "Newtonsoft.Json": "13.0.4",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
@@ -1253,6 +1262,11 @@
       "sha512": "sha512-kKo7XqyLF8blXGqQHlqKQ+AzST42kpB7oG81Km/kFEzWVfeDMgaEquOLAr/ZiR4tnkUbbWYrY6CJPTavFqGn6Q==",
       "path": "xunit.extensibility.execution/2.6.2",
       "hashPath": "xunit.extensibility.execution.2.6.2.nupkg.sha512"
+    },
+    "Lancamentos.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Lancamentos.Library/1.0.0": {
       "type": "project",

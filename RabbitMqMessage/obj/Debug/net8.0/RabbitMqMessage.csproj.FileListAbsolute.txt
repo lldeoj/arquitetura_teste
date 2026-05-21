@@ -10,3 +10,16 @@ C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessag
 C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\refint\RabbitMqMessage.dll
 C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.pdb
 C:\code\teste\ServiceLancamentos\RabbitMqMessage\obj\Debug\net8.0\ref\RabbitMqMessage.dll
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\bin\Debug\net8.0\RabbitMqMessage.deps.json
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\bin\Debug\net8.0\RabbitMqMessage.dll
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\bin\Debug\net8.0\RabbitMqMessage.pdb
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.csproj.AssemblyReference.cache
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.AssemblyInfoInputs.cache
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.AssemblyInfo.cs
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.csproj.CoreCompileInputs.cache
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.sourcelink.json
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.dll
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\refint\RabbitMqMessage.dll
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\RabbitMqMessage.pdb
+C:\Users\Weback\source\repos\lldeoj\arquitetura_teste\RabbitMqMessage\obj\Debug\net8.0\ref\RabbitMqMessage.dll

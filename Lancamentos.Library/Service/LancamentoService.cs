@@ -1,3 +1,4 @@
+using Lancamentos.Domain.Dto;
 using Lancamentos.Library.Interface;
 using Lancamentos.Library.Models;
 

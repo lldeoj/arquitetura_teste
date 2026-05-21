@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\RabbitMqMessage.csproj": {}
+    "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\RabbitMqMessage.csproj": {}
   },
   "projects": {
-    "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\RabbitMqMessage.csproj": {
+    "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\RabbitMqMessage.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\RabbitMqMessage.csproj",
+        "projectUniqueName": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\RabbitMqMessage.csproj",
         "projectName": "RabbitMqMessage",
-        "projectPath": "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\RabbitMqMessage.csproj",
-        "packagesPath": "C:\\Users\\OPAH-000564\\.nuget\\packages\\",
-        "outputPath": "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\obj\\",
+        "projectPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\RabbitMqMessage.csproj",
+        "packagesPath": "C:\\Users\\Weback\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\OPAH-000564\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Weback\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -77,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

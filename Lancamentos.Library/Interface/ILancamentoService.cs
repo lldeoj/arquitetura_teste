@@ -1,4 +1,4 @@
-using Lancamentos.Library.Models;
+using Lancamentos.Domain.Dto;
 
 namespace Lancamentos.Library.Interface
 {

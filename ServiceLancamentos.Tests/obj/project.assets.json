@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net8.0": {
       "Microsoft.CodeCoverage/18.5.0": {
@@ -2518,10 +2518,21 @@
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "Lancamentos.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Lancamentos.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Lancamentos.Domain.dll": {}
+        }
+      },
       "Lancamentos.Library/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "Lancamentos.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "Newtonsoft.Json": "13.0.4",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
@@ -7613,6 +7624,11 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
+    "Lancamentos.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Lancamentos.Domain/Lancamentos.Domain.csproj",
+      "msbuildProject": "../Lancamentos.Domain/Lancamentos.Domain.csproj"
+    },
     "Lancamentos.Library/1.0.0": {
       "type": "project",
       "path": "../Lancamentos.Library/Lancamentos.Library.csproj",
@@ -7642,23 +7658,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\OPAH-000564\\.nuget\\packages\\": {},
+    "C:\\Users\\Weback\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\code\\teste\\ServiceLancamentos\\ServiceLancamentos.Tests\\ServiceLancamentos.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\ServiceLancamentos.Tests\\ServiceLancamentos.Tests.csproj",
       "projectName": "ServiceLancamentos.Tests",
-      "projectPath": "C:\\code\\teste\\ServiceLancamentos\\ServiceLancamentos.Tests\\ServiceLancamentos.Tests.csproj",
-      "packagesPath": "C:\\Users\\OPAH-000564\\.nuget\\packages\\",
-      "outputPath": "C:\\code\\teste\\ServiceLancamentos\\ServiceLancamentos.Tests\\obj\\",
+      "projectPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\ServiceLancamentos.Tests\\ServiceLancamentos.Tests.csproj",
+      "packagesPath": "C:\\Users\\Weback\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\ServiceLancamentos.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\OPAH-000564\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Weback\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7674,14 +7690,14 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\code\\teste\\ServiceLancamentos\\Lancamentos.Library\\Lancamentos.Library.csproj": {
-              "projectPath": "C:\\code\\teste\\ServiceLancamentos\\Lancamentos.Library\\Lancamentos.Library.csproj"
+            "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\Lancamentos.Library\\Lancamentos.Library.csproj": {
+              "projectPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\Lancamentos.Library\\Lancamentos.Library.csproj"
             },
-            "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\RabbitMqMessage.csproj": {
-              "projectPath": "C:\\code\\teste\\ServiceLancamentos\\RabbitMqMessage\\RabbitMqMessage.csproj"
+            "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\RabbitMqMessage.csproj": {
+              "projectPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\RabbitMqMessage\\RabbitMqMessage.csproj"
             },
-            "C:\\code\\teste\\ServiceLancamentos\\ServiceLancamentos\\ServiceLancamentos.csproj": {
-              "projectPath": "C:\\code\\teste\\ServiceLancamentos\\ServiceLancamentos\\ServiceLancamentos.csproj"
+            "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\ServiceLancamentos\\ServiceLancamentos.csproj": {
+              "projectPath": "C:\\Users\\Weback\\source\\repos\\lldeoj\\arquitetura_teste\\ServiceLancamentos\\ServiceLancamentos.csproj"
             }
           }
         }
@@ -7696,7 +7712,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -7740,7 +7756,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
