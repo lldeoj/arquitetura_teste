@@ -35,7 +35,7 @@ namespace ApiGateway.Controllers
 
             request.Id = Guid.NewGuid();
 
-            await _rabbit.SendQueueMessageAsync(request);
+            await _rabbit.SendQueueMessageAsync(request, "consolidado.queue");
             return Accepted(new { fileName = request.Id.ToString() + ".json" });
         }
     }

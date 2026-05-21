@@ -1,5 +1,6 @@
 ﻿using RabbitMqMessage.Interface;
 using RabbitMqMessage.Models;
+using System.Reflection.Metadata;
 
 namespace RabbitMqMessage
 {
@@ -14,20 +15,22 @@ namespace RabbitMqMessage
             _settings = settings;
         }
 
-        public async Task SendQueueMessageAsync<T>(T message)
+        public async Task SendQueueMessageAsync<T>(T message, string queueName = "")
         {
-            await _context.SendMessageAsync(_settings.Queues, message);
+            int position = _settings.Queues.Length == 1 ? 0 : Array.FindIndex(_settings.Queues, q => q.Queue == queueName);
+            await _context.SendMessageAsync(_settings.Queues[position], message);
         }
 
-        public async Task<T?> ReceiveQueueMessageAsync<T>()
+        public async Task<T?> ReceiveQueueMessageAsync<T>(string queueName = "")
         {
-            return await _context.ReceiveMessageAsync<T>(_settings.Queues);
+            int position = _settings.Queues.Length == 1 ? 0 : Array.FindIndex(_settings.Queues, q => q.Queue == queueName);
+            return await _context.ReceiveMessageAsync<T>(_settings.Queues[position]);
         }
 
         public async Task ListenToQueueAsync<T>(Func<T, Task> processMessage)
-            => await _context.ListenToQueueAsync(processMessage, _settings.Queues, _settings.Queues.Queue);
+            => await _context.ListenToQueueAsync(processMessage, _settings.Queues[0], _settings.Queues[0].Queue);
 
         public async Task ListenToRetryQueueAsync<T>(Func<T, Task> processMessage)
-            => await _context.ListenToQueueAsync(processMessage, _settings.Queues, _settings.Queues.QueueRetry);
+            => await _context.ListenToQueueAsync(processMessage, _settings.Queues[0], _settings.Queues[0].QueueRetry);
     }
 }

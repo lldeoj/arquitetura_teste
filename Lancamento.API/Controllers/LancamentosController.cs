@@ -33,7 +33,7 @@ namespace ApiGateway.Controllers
         {
             if (request == null) return BadRequest("Requisição não pode ser nula");
 
-            await _rabbit.SendQueueMessageAsync(request);
+            await _rabbit.SendQueueMessageAsync(request, "lancamentos.queue");
             return Accepted();
         }
     }

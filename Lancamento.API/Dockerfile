@@ -9,15 +9,15 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Lancamentos.API/Lancamentos.API.csproj", "Lancamentos.API/"]
+COPY ["Lancamento.API/Lancamentos.API.csproj", "Lancamento.API/"]
 COPY ["RabbitMqMessage/RabbitMqMessage.csproj", "RabbitMqMessage/"]
 COPY ["ServiceConsolidado/ServiceConsolidado.csproj", "ServiceConsolidado/"]
 COPY ["Lancamentos.Library/Lancamentos.Library.csproj", "Lancamentos.Library/"]
-RUN dotnet restore "./Lancamentos.API/Lancamentos.API.csproj"
+RUN dotnet restore "./Lancamento.API/Lancamentos.API.csproj"
 COPY . .
 # Remove unnecessary config files from referenced projects
 RUN rm -f /src/ServiceConsolidado/appsettings.json /src/ServiceConsolidado/appsettings.Development.json
-WORKDIR "/src/Lancamentos.API"
+WORKDIR "/src/Lancamento.API"
 RUN dotnet build "./Lancamentos.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Esta fase é usada para publicar o projeto a ser copiado para a fase final

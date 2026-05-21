@@ -10,7 +10,7 @@ namespace RabbitMqMessage.Models
     public class RabbitMqConfiguration
     {
         public ConnectionSettings Connection { get; set; } = new();
-        public QueueSettings Queues { get; set; } = new();
+        public QueueSettings[] Queues { get; set; }
         public SslSettings Ssl { get; set; } = new();
         public RetrySettings Retry { get; set; } = new();
     }

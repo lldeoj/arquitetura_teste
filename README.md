@@ -6,7 +6,7 @@ Este repositório contém uma arquitetura de microserviços em .NET 8 para proce
 Projetos principais
 - ServiceLancamentos — Worker + API para processar lançamentos (porta 5000)
 - ServiceConsolidado — Worker para consolidação diária e geração de relatórios (porta 5001)
-- ApiGateway — API com endpoints públicos (POST /api/lancamentos, POST /api/consolidado, GET /api/relatorio/{file}) e Swagger (porta 5002)
+- Lancamentos.API — API com endpoints públicos (POST /api/lancamentos, POST /api/consolidado, GET /api/relatorio/{file}) e Swagger (porta 5002)
 - Lancamentos.Library — biblioteca compartilhada (modelos, repositório, serviços)
 - RabbitMqMessage — biblioteca compartilhada para integração com RabbitMQ
 
@@ -31,9 +31,7 @@ docker-compose up --build -d
 Serviços e acessos
 - RabbitMQ Management UI: http://localhost:15672 (usuário/senha: rabbitmq-user / rabbitmq-user)
 - PostgreSQL: host=db (no container), porta externa 5432, db=lancamentos, user=postgres, password=postgres
-- ServiceLancamentos API: http://localhost:5000/
-- ServiceConsolidado API: http://localhost:5001/
-- ApiGateway + Swagger UI: http://localhost:5002/ (Swagger na raiz)
+- Lancamentos.API + Swagger UI: http://localhost:5002/ (Swagger na raiz)
 
 Observações de configuração
 - No ambiente Docker os serviços usam host `rabbitmq` para conectar ao broker.
@@ -65,7 +63,7 @@ Exemplos de payloads
   "id": "660e8400-e29b-41d4-a716-446655440001",
   "agencia": "0001",
   "conta": "123456",
-  "dia": "2026-01-15T00:00:00Z"
+  "dia": "2026-01-01T00:00:00Z"
 }
 ```
 
