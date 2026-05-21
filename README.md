@@ -1,58 +1,130 @@
-# ServiceLancamentos
 
-Este repositório contém o serviço ServiceLancamentos, um repositório e código de integração com RabbitMQ e Postgres.
+# Arquitetura Teste — Microserviços de Lançamentos e Consolidação
 
-## Execução com Docker
+Este repositório contém uma arquitetura de microserviços em .NET 8 para processamento assíncrono de lançamentos e geração de relatórios consolidados.
 
-O docker-compose inclui:
-- Postgres
-- RabbitMQ (com management UI)
-- O serviço ServiceLancamentos
+Projetos principais
+- ServiceLancamentos — Worker + API para processar lançamentos (porta 5000)
+- ServiceConsolidado — Worker para consolidação diária e geração de relatórios (porta 5001)
+- ApiGateway — API com endpoints públicos (POST /api/lancamentos, POST /api/consolidado, GET /api/relatorio/{file}) e Swagger (porta 5002)
+- Lancamentos.Library — biblioteca compartilhada (modelos, repositório, serviços)
+- RabbitMqMessage — biblioteca compartilhada para integração com RabbitMQ
 
-Inicie tudo:
+Visão geral de execução
+1. Mensagens de lançamento ou consolidado são publicadas em exchanges/filas do RabbitMQ.
+2. Workers (ServiceLancamentos e ServiceConsolidado) consomem, processam e persistem em PostgreSQL ou salvam relatórios JSON.
+3. ApiGateway expõe endpoints para publicar mensagens e recuperar relatórios gerados.
 
-```bash
-docker-compose up --build
+Como executar (Docker)
+1. No diretório raiz, pare containers antigos:
+
+```powershell
+docker-compose down
 ```
 
-RabbitMQ Management UI: http://localhost:15672 (user: rabbitmq-user / rabbitmq-user)
+2. Suba todos os serviços:
 
-Postgres: host=db, database=lancamentos, user=postgres, password=postgres
+```powershell
+docker-compose up --build -d
+```
 
-Fila e exchange usados:
-- Exchange: lancamentos.exchange
-- Queue: lancamentos.queue
+Serviços e acessos
+- RabbitMQ Management UI: http://localhost:15672 (usuário/senha: rabbitmq-user / rabbitmq-user)
+- PostgreSQL: host=db (no container), porta externa 5432, db=lancamentos, user=postgres, password=postgres
+- ServiceLancamentos API: http://localhost:5000/
+- ServiceConsolidado API: http://localhost:5001/
+- ApiGateway + Swagger UI: http://localhost:5002/ (Swagger na raiz)
 
-## Teste completo (end-to-end)
+Observações de configuração
+- No ambiente Docker os serviços usam host `rabbitmq` para conectar ao broker.
+- Relatórios gerados pelo ServiceConsolidado são salvos em /app/relatorios e expostos via volume `relatorios-data`.
 
-1. Inicie o ambiente com `docker-compose up --build`.
-2. Acesse o RabbitMQ Management UI (http://localhost:15672) e publique uma mensagem na fila `lancamentos.queue` ligada ao exchange `lancamentos.exchange`.
+Como testar
+- Enviar mensagem via RabbitMQ Management UI (Queues → Publish message) ou usar os endpoints do ApiGateway.
 
-Exemplo de body JSON da mensagem (RabbitMQRequest):
+Exemplos de payloads
+- Lancamento (RabbitMQRequest)
 
 ```json
 {
-  "Id": "<GUID>",
-  "Valor": 100.0,
-  "IsCredito": true,
-  "AgenciaOrigem": "001",
-  "ContaOrigem": "12345-6",
-  "Descricao": "Teste",
-  "Usuario": "usuario",
-  "DataHora": "2026-01-01T00:00:00Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "valor": 1000.00,
+  "isCredito": true,
+  "agenciaOrigem": "0001",
+  "contaOrigem": "123456",
+  "descricao": "Depósito inicial",
+  "usuario": "usuario",
+  "dataHora": "2026-01-01T00:00:00Z"
 }
 ```
 
-3. Após a mensagem ser processada pelo serviço, verifique no Postgres se o registro foi inserido:
+- Consolidado (ConsolidadoRequest)
 
-   - Conecte ao banco (psql) ou use uma ferramenta GUI apontando para localhost:5432 (usuário postgres / senha postgres) e execute:
-
-```sql
-SELECT * FROM "Lancamentos" WHERE "Id" = '<GUID>';
+```json
+{
+  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "agencia": "0001",
+  "conta": "123456",
+  "dia": "2026-01-15T00:00:00Z"
+}
 ```
 
-4. O registro inserido deverá ter os campos correspondentes à mensagem.
+Recuperar relatório
+- Após processamento, o relatório JSON será salvo em /app/relatorios/{GUID}.json; para copiar para host:
 
-Observações:
-- A configuração do serviço aponta para os hosts `db` e `rabbitmq` quando executado via docker-compose.
-- Ajuste GUID no SELECT pelo valor usado na mensagem.
+```powershell
+docker cp <container_id>:/app/relatorios/<guid>.json ./relatorio.json
+```
+
+Logs e troubleshooting
+- Ver logs em tempo real:
+
+```powershell
+docker-compose logs -f
+```
+
+- Filtrar por serviço:
+
+```powershell
+docker-compose logs -f api-gateway
+docker-compose logs -f service
+docker-compose logs -f service-consolidado
+docker-compose logs -f rabbitmq
+```
+
+- Problemas comuns:
+  - Erro de conexão RabbitMQ: confirme `RabbitMqConfiguration.Connection.Host` = `rabbitmq` no ambiente Docker.
+  - Erro de portas: verifique mapeamentos em docker-compose.yml (5000, 5001, 5002)
+
+Estrutura de filas (RabbitMQ)
+- Exchange: lancamentos.exchange → lancamentos.queue, lancamentos.retry.queue, lancamentos.fail.queue
+- Exchange: consolidado.exchange → consolidado.queue, consolidado.retry.queue, consolidado.fail.queue
+
+Banco de dados
+- Conectar ao PostgreSQL dentro do container:
+
+```powershell
+docker exec -it <postgres_container_id> psql -U postgres -d lancamentos
+```
+
+Exemplo de consulta:
+
+```sql
+SELECT * FROM "Lancamentos" WHERE "Id" = '550e8400-e29b-41d4-a716-446655440000';
+```
+
+Documentação adicional (conteúdo agregado)
+- ARCHITECTURE.md — visão da arquitetura, diagramas de filas, injeção de dependências, escalabilidade e monitoração
+- EXECUTION_GUIDE.md — guia passo a passo, exemplos de cURL, acesso aos relatórios e troubleshooting profundo
+- CHANGELOG.md — histórico de alterações e arquivos adicionados
+- ServiceConsolidado/README.md — documentação específica do serviço de consolidação
+
+Contribuição
+- Abrir issues e PRs no repositório.
+- Para desenvolvimento local sem Docker, garanta RabbitMQ e Postgres rodando localmente e ajuste ConnectionStrings em appsettings.
+
+Licença e contato
+- Repositório: https://github.com/lldeoj/arquitetura_teste
+
+---
+
