@@ -9,24 +9,24 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ApiGateway/ApiGateway.csproj", "ApiGateway/"]
+COPY ["Lancamentos.API/Lancamentos.API.csproj", "Lancamentos.API/"]
 COPY ["RabbitMqMessage/RabbitMqMessage.csproj", "RabbitMqMessage/"]
 COPY ["ServiceConsolidado/ServiceConsolidado.csproj", "ServiceConsolidado/"]
 COPY ["Lancamentos.Library/Lancamentos.Library.csproj", "Lancamentos.Library/"]
-RUN dotnet restore "./ApiGateway/ApiGateway.csproj"
+RUN dotnet restore "./Lancamentos.API/Lancamentos.API.csproj"
 COPY . .
 # Remove unnecessary config files from referenced projects
 RUN rm -f /src/ServiceConsolidado/appsettings.json /src/ServiceConsolidado/appsettings.Development.json
-WORKDIR "/src/ApiGateway"
-RUN dotnet build "./ApiGateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Lancamentos.API"
+RUN dotnet build "./Lancamentos.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Esta fase é usada para publicar o projeto a ser copiado para a fase final
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ApiGateway.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Lancamentos.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Esta fase é usada na produção ou quando executada no VS no modo normal (padrão quando não está usando a configuração de Depuração)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ApiGateway.dll"]
+ENTRYPOINT ["dotnet", "Lancamentos.API.dll"]

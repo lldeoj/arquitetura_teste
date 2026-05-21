@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Lancamentos.Library")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ee38b62a232a45e21ceeab13c3b2fd14e134fe6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02a98c91a600ecd9c0b73c289d158a94c14b32b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Lancamentos.Library")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Lancamentos.Library")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
